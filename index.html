@@ -1,884 +1,533 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Parroquia Cristo Rey</title>
-  <meta name="description" content="Parroquia Cristo Rey — Iglesia Católica en Culiacán, Sinaloa. Horarios de misas, sacramentos, ministerios y eventos."/>
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="assets/logo.png"/>
-  <link rel="apple-touch-icon" href="assets/logo.png"/>
-  <!-- Open Graph -->
-  <link rel="canonical" href="https://cristoreyculiacan.mx/"/>
-  <meta property="og:url" content="https://cristoreyculiacan.mx/"/>
-  <meta property="og:title" content="Parroquia Cristo Rey — Iglesia Católica en Culiacán"/>
-  <meta property="og:type" content="website"/>
-  <meta name="twitter:card" content="summary_large_image"/>
-  <meta property="og:site_name" content="Parroquia Cristo Rey"/>
-  <meta property="og:locale" content="es_MX"/>
-  <meta property="og:image" content="https://cristoreyculiacan.mx/assets/hero.jpeg"/>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,600&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --navy: #142b46; --navy2: #08111f; --black: #050c18;
-      --gold: #b1934a; --gold2: #e3cd97;
-      --cream: #f8f3e7; --paper: #efe6d2; --ink: #1a2230;
-      --mid: #8a8175; --line: rgba(177,147,74,0.22); --white: #ffffff;
-    }
-    html { scroll-behavior: smooth; }
-    body { font-family: 'Inter', sans-serif; font-weight: 300; color: var(--ink); background: var(--cream); overflow-x: hidden; }
-    h1, h2, h3, h4 { font-family: 'Cormorant Garamond', serif; }
-    img { max-width: 100%; display: block; }
-    a { text-decoration: none; }
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="icon" href="assets/logo.png">
+<title>Fiesta Patronal Cristo Rey 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.9s ease, transform 0.9s ease; }
-    .reveal-scale { opacity: 0; transform: scale(0.96); transition: opacity 0.9s ease, transform 0.9s ease; }
-    .reveal.in, .reveal-scale.in { opacity: 1; transform: none; }
+<style>
+/* Layout: festive hero band with fireworks → papel picado → bright card calendar on sunny ground */
+:root{
+  --sun:#f8f7f4;
+  --ink:#16131f;
+  --ink2:#6b6878;
+  --pink:#ec4899;
+  --orange:#f97316;
+  --yellow:#fbbf24;
+  --turq:#14b8a6;
+  --green:#10b981;
+  --blue:#4f46e5;
+  --purple:#7c3aed;
+  --red:#ef4444;
+  --card:#ffffff;
+  --display:'Sora',system-ui,sans-serif;
+  --script:'Sora',system-ui,sans-serif;
+  --body:'Manrope',system-ui,sans-serif;
+  color-scheme:light;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  background:var(--sun);color:var(--ink);font-family:var(--body);overflow-x:hidden;
+  background-image:
+    radial-gradient(circle at 10% 20%,rgba(236,72,153,.05) 0,transparent 30%),
+    radial-gradient(circle at 90% 40%,rgba(20,184,166,.06) 0,transparent 30%),
+    radial-gradient(circle at 85% 90%,rgba(124,58,237,.05) 0,transparent 30%);
+}
 
-    /* SCROLL PROGRESS */
-    #scrollBar { position: fixed; top: 0; left: 0; height: 3px; background: linear-gradient(90deg, var(--gold), var(--gold2)); width: 0%; z-index: 1002; transition: width 0.1s linear; }
+/* balloons layer */
+#balloons{position:fixed;inset:0;pointer-events:none;z-index:5;overflow:hidden}
+.balloon{position:absolute;bottom:-160px;animation:rise linear forwards;will-change:transform}
+.balloon svg{display:block;animation:sway ease-in-out infinite alternate}
+@keyframes rise{to{transform:translateY(calc(-100vh - 260px))}}
+@keyframes sway{from{transform:translateX(-14px) rotate(-5deg)}to{transform:translateX(14px) rotate(5deg)}}
 
-    /* HEADER */
-    header {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 1001;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 26px 56px;
-      transition: background 0.4s, padding 0.4s, border-color 0.4s, box-shadow 0.4s;
-      border-bottom: 1px solid transparent;
-    }
-    header.solid { background: rgba(248,243,231,0.92); backdrop-filter: blur(10px); padding: 16px 56px; border-color: var(--line); box-shadow: 0 8px 30px rgba(20,43,70,0.05); }
-    .brand { display: flex; align-items: center; gap: 14px; color: var(--white); transition: color 0.4s; }
-    header.solid .brand { color: var(--navy); }
-    .brand-logo { width: 46px; height: 46px; border-radius: 50%; background: var(--white); display: flex; align-items: center; justify-content: center; flex-shrink: 0; overflow: hidden; padding: 3px; box-shadow: 0 4px 18px rgba(0,0,0,0.18); }
-    .brand-logo img { width: 100%; height: 100%; object-fit: contain; }
-    .brand-text { display: flex; flex-direction: column; line-height: 1.25; }
-    .brand-text .name { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 21px; letter-spacing: 0.04em; }
-    .brand-text .sub { font-size: 9px; letter-spacing: 0.32em; text-transform: uppercase; color: var(--gold2); }
-    header.solid .brand-text .sub { color: var(--gold); }
-    .menu-btn { display: flex; flex-direction: column; justify-content: center; gap: 6px; background: none; border: none; cursor: pointer; padding: 6px; z-index: 1001; color: var(--white); transition: color 0.4s; }
-    header.solid .menu-btn { color: var(--navy); }
-    .menu-btn span { display: block; height: 1.5px; background: currentColor; transition: width 0.4s, transform 0.4s, opacity 0.3s; }
-    .menu-btn span:nth-child(1) { width: 30px; }
-    .menu-btn span:nth-child(2) { width: 20px; }
-    .menu-btn span:nth-child(3) { width: 26px; }
-    .menu-btn.open span:nth-child(1) { width: 26px; transform: translateY(7.5px) rotate(45deg); }
-    .menu-btn.open span:nth-child(2) { opacity: 0; width: 0; }
-    .menu-btn.open span:nth-child(3) { width: 26px; transform: translateY(-7.5px) rotate(-45deg); }
+/* ── HERO ── */
+.hero{
+  position:relative;overflow:hidden;text-align:center;color:#fff;
+  background:
+    radial-gradient(circle at 50% 130%,rgba(251,191,36,.35) 0,transparent 55%),
+    linear-gradient(135deg,#4f46e5 0%,#7c3aed 40%,#ec4899 80%,#f97316 120%);
+  padding-block:64px 90px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));
+}
+#fw{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.hero-inner{position:relative;z-index:2;max-width:760px;margin:0 auto}
+.hero-tag{
+  display:inline-block;background:var(--yellow);color:var(--ink);
+  font-weight:700;font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;
+  padding:7px 16px;border-radius:999px;
+}
+.hero-pre{
+  font-family:var(--display);font-weight:300;font-size:clamp(1rem,4vw,1.4rem);
+  letter-spacing:.35em;text-transform:uppercase;margin-top:26px;margin-bottom:8px;line-height:1;opacity:.9;
+}
+.hero-title{
+  font-family:var(--display);font-weight:800;font-size:clamp(3.2rem,15vw,8rem);
+  line-height:.92;letter-spacing:-.04em;text-wrap:balance;
+}
+.hero-year{
+  display:inline-flex;gap:6px;margin-top:14px;
+}
+.hero-year span{
+  font-family:var(--display);font-weight:600;font-size:clamp(1.3rem,5vw,2rem);
+  width:1.6em;height:1.7em;display:grid;place-items:center;border-radius:10px;
+  animation:bob 2.4s ease-in-out infinite;
+}
+.hero-year span:nth-child(1){background:var(--yellow);color:var(--ink)}
+.hero-year span:nth-child(2){background:var(--turq);animation-delay:.2s}
+.hero-year span:nth-child(3){background:var(--green);animation-delay:.4s}
+.hero-year span:nth-child(4){background:var(--blue);animation-delay:.6s}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.hero-dates{
+  margin-top:22px;font-weight:500;font-size:clamp(.95rem,3.4vw,1.15rem);letter-spacing:.02em;opacity:.95;
+}
+.chip{
+  display:inline-flex;align-items:center;gap:8px;margin-top:14px;
+  background:rgba(255,255,255,.18);border:2px solid rgba(255,255,255,.55);
+  backdrop-filter:blur(6px);border-radius:999px;padding:7px 18px;
+  font-weight:700;font-size:.85rem;font-variant-numeric:tabular-nums;
+}
+.chip i{width:9px;height:9px;border-radius:50%;background:var(--yellow);box-shadow:0 0 10px var(--yellow);animation:blink 1.2s infinite}
+@keyframes blink{50%{opacity:.25}}
 
-    /* NAV OVERLAY */
-    .nav-overlay { position: fixed; inset: 0; z-index: 1000; display: grid; grid-template-columns: 1fr 400px; pointer-events: none; overflow: hidden; }
-    .nav-panel-left { background: var(--black); display: flex; flex-direction: column; justify-content: center; padding: 100px 72px 80px; transform: translateX(-100%); transition: transform 0.72s cubic-bezier(0.76,0,0.24,1); }
-    .nav-panel-right { position: relative; overflow-y: auto; overflow-x: hidden; transform: translateX(100%); transition: transform 0.72s cubic-bezier(0.76,0,0.24,1) 0.06s; background: linear-gradient(135deg, #0d1e36 0%, #1a3875 40%, #b1934a 80%, #e8a020 100%); }
-    .nav-panel-right-inner { position: relative; z-index: 1; min-height: 100%; display: flex; flex-direction: column; justify-content: flex-end; padding: 120px 44px 56px; }
-    .nav-overlay.open { pointer-events: all; }
-    .nav-overlay.open .nav-panel-left { transform: translateX(0); }
-    .nav-overlay.open .nav-panel-right { transform: translateX(0); }
-    .nav-links { list-style: none; }
-    .nav-links li { opacity: 0; transform: translateY(24px); transition: opacity 0.5s ease, transform 0.5s ease; }
-    .nav-overlay.open .nav-links li:nth-child(1) { opacity:1; transform:none; transition-delay:0.30s; }
-    .nav-overlay.open .nav-links li:nth-child(2) { opacity:1; transform:none; transition-delay:0.38s; }
-    .nav-overlay.open .nav-links li:nth-child(3) { opacity:1; transform:none; transition-delay:0.46s; }
-    .nav-overlay.open .nav-links li:nth-child(4) { opacity:1; transform:none; transition-delay:0.54s; }
-    .nav-overlay.open .nav-links li:nth-child(5) { opacity:1; transform:none; transition-delay:0.62s; }
-    .nav-overlay.open .nav-links li:nth-child(6) { opacity:1; transform:none; transition-delay:0.70s; }
-    .nav-links a { display: block; font-family: 'Cormorant Garamond', serif; font-size: clamp(2.8rem, 5.5vw, 4.4rem); font-weight: 600; line-height: 1.1; color: rgba(248,243,231,0.18); padding: 10px 0; letter-spacing: 0.02em; transition: color 0.3s, letter-spacing 0.4s; position: relative; }
-    .nav-links a:hover { color: var(--cream); letter-spacing: 0.06em; }
-    .nav-links a span { display: inline-block; position: relative; }
-    .nav-links a span::after { content: ''; position: absolute; left: 0; bottom: -2px; width: 0; height: 1px; background: var(--gold); transition: width 0.4s; }
-    .nav-links a:hover span::after { width: 100%; }
-    .nav-bottom { margin-top: 48px; padding-top: 28px; border-top: 1px solid rgba(177,147,74,0.2); display: flex; gap: 40px; opacity: 0; transition: opacity 0.5s ease 0.75s; }
-    .nav-overlay.open .nav-bottom { opacity: 1; }
-    .nav-bottom-item { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(248,243,231,0.35); line-height: 1.8; }
-    .nav-bottom-item strong { display: block; color: rgba(248,243,231,0.65); font-weight: 500; margin-bottom: 4px; }
-    .nav-event-badge { display: inline-block; background: var(--gold); color: var(--white); font-size: 9px; font-weight: 600; letter-spacing: 0.24em; text-transform: uppercase; padding: 5px 12px; margin-bottom: 20px; opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease 0.6s, transform 0.5s ease 0.6s; }
-    .nav-event-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.4rem, 4vw, 3.6rem); font-weight: 600; line-height: 1.1; color: var(--white); margin-bottom: 16px; opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease 0.68s, transform 0.5s ease 0.68s; }
-    .nav-event-meta { font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.58); margin-bottom: 28px; line-height: 1.9; opacity: 0; transform: translateY(12px); transition: opacity 0.5s ease 0.74s, transform 0.5s ease 0.74s; }
-    .nav-event-cta { display: inline-flex; align-items: center; gap: 10px; font-size: 10px; font-weight: 600; letter-spacing: 0.24em; text-transform: uppercase; color: var(--cream); border: 1px solid rgba(255,255,255,0.35); padding: 14px 26px; opacity: 0; transform: translateY(12px); transition: opacity 0.5s ease 0.80s, transform 0.5s ease 0.80s, background 0.3s, border-color 0.3s; }
-    .nav-event-cta:hover { background: var(--gold); border-color: var(--gold); }
-    .nav-overlay.open .nav-event-badge, .nav-overlay.open .nav-event-title, .nav-overlay.open .nav-event-meta, .nav-overlay.open .nav-event-cta { opacity: 1; transform: none; }
-    .nav-event-deco { position: absolute; top: 0; right: 0; width: 70%; height: 100%; background: radial-gradient(ellipse at top right, rgba(255,255,255,0.06) 0%, transparent 60%); pointer-events: none; }
-    .nav-event-number { position: absolute; top: 40px; right: 36px; font-family: 'Cormorant Garamond', serif; font-size: 9rem; font-weight: 600; line-height: 1; color: rgba(255,255,255,0.04); pointer-events: none; letter-spacing: -0.04em; }
+/* papel picado */
+.picado{
+  position:relative;z-index:3;display:flex;justify-content:center;
+  margin-top:-34px;overflow:hidden;height:92px;
+}
+.picado::before{content:"";position:absolute;top:6px;left:0;right:0;height:1px;background:#16131f;opacity:.3}
+.pp{
+  flex:0 0 auto;width:74px;height:86px;margin:0 3px;transform-origin:top center;
+  animation:flutter 3s ease-in-out infinite;
+  -webkit-mask:
+    radial-gradient(circle 7px at 50% 34%,#0000 98%,#000) ,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite:source-in;mask-composite:intersect;
+  clip-path:polygon(0 6%,100% 6%,100% 82%,88% 100%,76% 82%,63% 100%,50% 82%,37% 100%,24% 82%,12% 100%,0 82%);
+  background:
+    radial-gradient(circle 6px at 25% 60%,var(--sun) 96%,transparent) ,
+    radial-gradient(circle 6px at 75% 60%,var(--sun) 96%,transparent),
+    radial-gradient(circle 4px at 50% 70%,var(--sun) 96%,transparent),
+    linear-gradient(45deg,transparent 46%,rgba(255,255,255,.35) 47% 53%,transparent 54%),
+    linear-gradient(-45deg,transparent 46%,rgba(255,255,255,.35) 47% 53%,transparent 54%),
+    var(--c);
+}
+.pp:nth-child(6n+1){--c:var(--pink)}
+.pp:nth-child(6n+2){--c:var(--yellow);animation-delay:.3s}
+.pp:nth-child(6n+3){--c:var(--turq);animation-delay:.6s}
+.pp:nth-child(6n+4){--c:var(--orange);animation-delay:.9s}
+.pp:nth-child(6n+5){--c:var(--green);animation-delay:1.2s}
+.pp:nth-child(6n+6){--c:var(--purple);animation-delay:1.5s}
+@keyframes flutter{0%,100%{transform:rotate(-3deg) skewX(-2deg)}50%{transform:rotate(3deg) skewX(2deg)}}
 
-    /* HERO */
-    .hero {
-      position: relative; min-height: 100vh;
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      text-align: center; padding: 120px 24px 80px; overflow: hidden;
-      gap: 0;
-    }
-    .hero-bg {
-      position: absolute; inset: 0;
-      background: url('assets/hero.jpeg') center 28% / cover no-repeat;
-      will-change: transform;
-    }
-    .hero-bg::after {
-      content: ''; position: absolute; inset: 0;
-      background: linear-gradient(180deg, rgba(5,12,24,0.55) 0%, rgba(5,12,24,0.82) 65%, rgba(5,12,24,0.97) 100%);
-    }
-    .hero-content { position: relative; z-index: 2; max-width: 940px; }
-    .hero-eyebrow { display: block; font-size: 11px; letter-spacing: 0.5em; text-transform: uppercase; color: var(--gold2); margin-bottom: 30px; animation: heroIn 1s ease 0.2s both; }
+/* ── CALENDAR ── */
+.wrap{
+  position:relative;z-index:2;max-width:780px;margin:0 auto;
+  padding-block:24px 70px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));
+}
+.sec-title{text-align:center;margin-bottom:26px}
+.sec-title small{font-weight:700;letter-spacing:.24em;font-size:.68rem;color:var(--purple);text-transform:uppercase}
+.sec-title h2{font-family:var(--display);font-weight:700;letter-spacing:-.03em;font-size:clamp(1.8rem,7vw,2.8rem);line-height:1.05;margin-top:8px;color:var(--ink)}
 
-    /* HERO EVENT CHIP */
-    .hero-ev-chip {
-      display: inline-flex; align-items: center; gap: 12px;
-      padding: 13px 26px 13px 18px;
-      border-radius: 100px;
-      background: linear-gradient(110deg, #6b21d4, #a855f7, #7c3aed, #6b21d4);
-      background-size: 300% 100%;
-      border: none; cursor: pointer; text-decoration: none;
-      box-shadow: 0 0 28px rgba(168,85,247,0.55), 0 0 60px rgba(168,85,247,0.2);
-      animation: heroIn 1s ease 1.0s both, chipFlow 3s linear 2s infinite;
-      transition: box-shadow 0.3s, transform 0.25s;
-    }
-    .hero-ev-chip:hover { box-shadow: 0 0 42px rgba(168,85,247,0.75), 0 0 80px rgba(168,85,247,0.3); transform: translateY(-3px) scale(1.03); }
-    .hero-ev-chip .chip-dot { width: 9px; height: 9px; border-radius: 50%; background: #fff; box-shadow: 0 0 7px rgba(255,255,255,0.9); animation: pulse 1.4s ease-in-out infinite; }
-    .hero-ev-chip .chip-text { font-size: 12px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #fff; }
-    .hero-ev-chip .chip-arrow { font-size: 14px; color: rgba(255,255,255,0.8); transition: transform 0.3s; }
-    .hero-ev-chip:hover .chip-arrow { transform: translateY(4px); }
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,340px),1fr));gap:14px}
+.day{
+  display:flex;gap:14px;align-items:stretch;background:var(--card);
+  border-radius:16px;padding:12px;min-width:0;
+  box-shadow:0 1px 2px rgba(22,19,31,.04),0 8px 24px rgba(22,19,31,.06);
+  border:1px solid rgba(22,19,31,.06);
+  transition:transform .2s;
+}
+.day:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(22,19,31,.1)}
+.date{
+  flex:0 0 70px;border-radius:12px;background:var(--c);color:#fff;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+}
+.date b{font-family:var(--display);font-weight:700;letter-spacing:-.04em;font-size:2.1rem;line-height:1}
+.date span{font-weight:600;font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;opacity:.9;margin-top:2px}
+.info{display:flex;flex-direction:column;justify-content:center;gap:5px;min-width:0}
+.ev{display:flex;align-items:center;gap:8px;font-weight:600;font-size:.96rem;line-height:1.3}
+.ev .ic{flex:0 0 28px;height:28px;border-radius:8px;display:grid;place-items:center;background:color-mix(in srgb,var(--c) 16%,#fff)}
+.ev .ic svg{width:16px;height:16px;stroke:var(--c);fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.ev em{font-style:normal;color:var(--c);font-weight:700;white-space:nowrap}
+.who{font-size:.82rem;color:var(--ink2);padding-left:36px}
+.who b{color:var(--ink);font-weight:600}
+.badge{align-self:flex-start;margin-left:36px;font-size:.6rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:3px 10px;border-radius:999px;background:var(--c);color:#fff}
 
-    /* LIVE EVENT CHIP — header */
-    .header-chip {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 6px 14px 6px 10px;
-      border-radius: 100px;
-      background: linear-gradient(110deg, #1a7a3a, #25c85a, #1db84f, #1a7a3a);
-      background-size: 300% 100%;
-      border: none; cursor: pointer; text-decoration: none;
-      box-shadow: 0 0 14px rgba(37,200,90,0.5), 0 0 32px rgba(37,200,90,0.18);
-      animation: chipFlow 3s linear infinite;
-      transition: box-shadow 0.3s, transform 0.2s;
-      position: absolute; left: 50%; transform: translateX(-50%);
-    }
-    .header-chip:hover { box-shadow: 0 0 22px rgba(37,200,90,0.7), 0 0 48px rgba(37,200,90,0.28); transform: translateX(-50%) scale(1.04); }
-    @keyframes chipFlow { 0%{background-position:0% 0} 100%{background-position:300% 0} }
-    .chip-dot { width: 7px; height: 7px; border-radius: 50%; background: #fff; flex-shrink: 0; box-shadow: 0 0 5px rgba(255,255,255,0.9); animation: pulse 1.4s ease-in-out infinite; }
-    .chip-text { font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #fff; white-space: nowrap; }
-    .chip-arrow { font-size: 11px; color: rgba(255,255,255,0.75); transition: transform 0.3s; }
-    .header-chip:hover .chip-arrow { transform: translateY(3px); }
-    @media (max-width: 480px) {
-      .chip-text { font-size: 9px; letter-spacing: 0.1em; }
-      .header-chip { padding: 5px 11px 5px 8px; gap: 6px; }
-    }
-    .hero h1 { font-weight: 600; font-size: clamp(4.5rem, 13vw, 11rem); line-height: 1; letter-spacing: 0.04em; color: var(--white); text-transform: uppercase; animation: heroIn 1s ease 0.5s both; }
-    .hero h1 em { display: block; font-style: italic; font-weight: 300; font-size: 0.45em; letter-spacing: 0.15em; color: var(--gold2); text-transform: none; margin-top: 16px; }
-    .hero p { font-size: 17px; line-height: 1.9; color: rgba(255,255,255,0.75); max-width: 500px; margin: 32px auto 40px; font-weight: 300; animation: heroIn 1s ease 0.8s both; }
-    .hero-cta { display: flex; gap: 18px; justify-content: center; flex-wrap: wrap; animation: heroIn 1s ease 1.0s both; }
-    .btn { display: inline-block; font-size: 10px; font-weight: 600; letter-spacing: 0.24em; text-transform: uppercase; padding: 14px 30px; border-radius: 2px; transition: all 0.25s; border: 1px solid transparent; }
-    .btn-gold { background: var(--gold); color: var(--white); border-color: var(--gold); }
-    .btn-gold:hover { background: transparent; color: var(--gold); }
-    .btn-outline { border-color: rgba(255,255,255,0.4); color: var(--white); }
-    .btn-outline:hover { background: rgba(255,255,255,0.1); border-color: var(--gold2); }
-    .hero-scroll { position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%); z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 10px; color: rgba(255,255,255,0.5); font-size: 9px; letter-spacing: 0.32em; text-transform: uppercase; }
-    .hero-scroll .stick { width: 1px; height: 38px; background: linear-gradient(180deg, var(--gold2), transparent); animation: stickPulse 2.4s ease-in-out infinite; }
-    @keyframes stickPulse { 0%,100% { opacity:0.4; } 50% { opacity:1; } }
-    @keyframes heroIn { from { opacity:0; transform: translateY(32px); } to { opacity:1; transform:none; } }
+/* grand finale */
+.finale{
+  grid-column:1/-1;position:relative;overflow:hidden;border-radius:24px;color:#fff;
+  padding:26px 22px;
+  background:linear-gradient(120deg,#4f46e5,#7c3aed 45%,#ec4899 85%,#f97316 120%);
+  box-shadow:0 20px 40px rgba(124,58,237,.22);border:none;
+}
+#fw2{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.finale-in{position:relative;z-index:1;display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+.finale .date{flex:0 0 88px;height:100px;background:var(--yellow);color:var(--ink)}
+.finale .date b{font-size:3rem}
+.fin-txt{flex:1;min-width:220px}
+.fin-txt small{font-weight:600;letter-spacing:.22em;font-size:.66rem;text-transform:uppercase;opacity:.85}
+.fin-txt h3{font-family:var(--display);font-weight:800;letter-spacing:-.04em;font-size:clamp(2.2rem,8vw,3.2rem);line-height:1;margin:6px 0 8px}
+.fin-txt p{font-weight:500;font-size:1.02rem}
+.fin-txt p strong{background:var(--yellow);color:var(--ink);padding:1px 8px;border-radius:6px}
+.times{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.times span{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);padding:4px 10px;border-radius:8px;font-weight:600;font-size:.82rem;font-variant-numeric:tabular-nums}
 
-    /* STATEMENT */
-    .statement { background: var(--black); padding: 140px 24px; text-align: center; position: relative; overflow: hidden; }
-    .statement::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 50%, rgba(177,147,74,0.07) 0%, transparent 65%); }
-    .statement-inner { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; }
-    .st-tag { font-size: 10px; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); margin-bottom: 40px; display: block; }
-    .st-text { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: clamp(2.6rem, 6.5vw, 5.5rem); line-height: 1.12; color: var(--cream); }
-    .st-text em { font-style: italic; color: var(--gold2); }
-    .st-line { width: 48px; height: 2px; background: var(--gold); margin: 36px auto; opacity: 0.6; }
-    .st-sub { font-size: 16px; color: rgba(248,243,231,0.5); line-height: 1.9; max-width: 520px; margin: 0 auto; }
+.foot{text-align:center;margin-top:40px}
+.foot .ad{font-weight:500;color:var(--ink2);font-size:.86rem}
+.foot .nm{font-family:var(--display);font-weight:700;letter-spacing:-.02em;font-size:1.3rem;color:var(--ink);margin-top:8px}
 
-    /* TEASER CARDS */
-    .teasers { background: var(--cream); padding: 120px 56px; }
-    .teasers-head { text-align: center; margin-bottom: 72px; }
-    .teasers-head .label { font-size: 10px; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; display: block; }
-    .teasers-head h2 { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: clamp(2.4rem, 5vw, 3.8rem); color: var(--navy); line-height: 1.1; }
-    .teasers-head h2 em { font-style: italic; color: var(--gold); }
-    .teasers-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 1100px; margin: 0 auto; }
-    .teaser-card {
-      position: relative; overflow: hidden; border: 1px solid var(--line);
-      display: flex; flex-direction: column; min-height: 420px;
-      transition: box-shadow 0.35s, transform 0.35s;
-      background: var(--white);
-    }
-    .teaser-card:hover { box-shadow: 0 24px 60px rgba(20,43,70,0.12); transform: translateY(-6px); }
-    .teaser-img {
-      aspect-ratio: 4/3; flex-shrink: 0;
-      background: url('assets/hero.jpeg') center / cover no-repeat;
-      position: relative;
-    }
-    .teaser-img::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 40%, rgba(5,12,24,0.55) 100%); transition: opacity 0.35s; }
-    .teaser-card:hover .teaser-img::after { opacity: 0.7; }
-    .teaser-img-dark { background-image: url('assets/gallery/images/1782245668051.jpeg'); background-position: center; filter: brightness(0.75) saturate(0.7); }
-    .teaser-img-mid { background-image: url('assets/gallery/images/1782245670287.jpeg'); background-position: center 40%; filter: brightness(0.65) saturate(0.6); }
-    .teaser-num { position: absolute; top: 16px; left: 20px; font-family: 'Cormorant Garamond', serif; font-size: 4.5rem; font-weight: 600; color: rgba(255,255,255,0.12); line-height: 1; z-index: 1; }
-    .teaser-tag { position: absolute; bottom: 16px; left: 20px; font-size: 8px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold2); background: rgba(5,12,24,0.5); padding: 4px 10px; z-index: 1; }
-    .teaser-body { padding: 28px 28px 32px; flex: 1; display: flex; flex-direction: column; }
-    .teaser-body h3 { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 1.6rem; color: var(--navy); margin-bottom: 10px; line-height: 1.2; }
-    .teaser-body h3 em { font-style: italic; color: var(--gold); }
-    .teaser-body p { font-size: 13.5px; line-height: 1.85; color: var(--mid); flex: 1; }
-    .teaser-link { display: inline-flex; align-items: center; gap: 8px; margin-top: 20px; font-size: 9px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--navy); border-bottom: 1px solid var(--line); padding-bottom: 2px; transition: color 0.2s, border-color 0.2s; }
-    .teaser-link:hover { color: var(--gold); border-color: var(--gold); }
-    .teaser-link svg { transition: transform 0.2s; }
-    .teaser-card:hover .teaser-link svg { transform: translateX(4px); }
+.day.today{outline:4px solid var(--yellow);outline-offset:3px}
+.snd{
+  position:fixed;z-index:20;
+  right:calc(16px + env(safe-area-inset-right,0px));
+  bottom:calc(16px + env(safe-area-inset-bottom,0px));
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--body);font-weight:700;font-size:.85rem;
+  color:#fff;background:var(--ink);border:none;border-radius:999px;
+  padding:11px 18px;cursor:pointer;
+  box-shadow:0 10px 30px rgba(22,19,31,.25);
+  transition:transform .15s,background .2s;
+}
+.snd:hover{transform:translateY(-2px)}
+.snd:focus-visible{outline:3px solid var(--yellow);outline-offset:3px}
+.snd.on{background:linear-gradient(120deg,#7c3aed,#ec4899)}
+.snd svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 
-    /* NEXT EVENT TEASER */
-    /* ── CINEMATIC EVENTS SECTION ── */
-    .events-sec {
-      position: relative; background: var(--black); overflow: hidden;
-      min-height: 92vh; display: flex; flex-direction: column;
-    }
-    /* Atmospheric background glow */
-    .events-sec::before {
-      content: ''; position: absolute; inset: 0; pointer-events: none;
-      background: radial-gradient(ellipse 80% 60% at 60% 40%, rgba(177,147,74,0.07) 0%, transparent 70%),
-                  radial-gradient(ellipse 40% 50% at 10% 80%, rgba(20,43,70,0.6) 0%, transparent 60%);
-    }
-    /* Decorative large number watermark */
-    .ev-deco-num {
-      position: absolute; right: 48px; top: 50%; transform: translateY(-55%);
-      font-family: 'Cormorant Garamond', serif; font-size: clamp(14rem, 22vw, 22rem);
-      font-weight: 600; line-height: 1; color: rgba(177,147,74,0.04);
-      pointer-events: none; letter-spacing: -0.04em; user-select: none;
-    }
-
-    /* Top strip */
-    .ev-topbar {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 32px 64px 0; position: relative; z-index: 1;
-    }
-    .ev-topbar-label { font-size: 9px; letter-spacing: 0.4em; text-transform: uppercase; color: rgba(177,147,74,0.6); }
-    .ev-topbar-link { display: inline-flex; align-items: center; gap: 8px; font-size: 9px; font-weight: 600; letter-spacing: 0.24em; text-transform: uppercase; color: rgba(248,243,231,0.4); transition: color 0.2s; }
-    .ev-topbar-link:hover { color: var(--gold2); }
-
-    /* Main content */
-    .ev-main {
-      flex: 1; display: grid; grid-template-columns: 1fr auto;
-      align-items: center; gap: 60px;
-      padding: 48px 64px 40px; position: relative; z-index: 1;
-    }
-
-    /* Left — event info */
-    .ev-badge-row { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; }
-    .ev-live-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--gold); flex-shrink: 0; animation: pulse 1.8s ease-in-out infinite; }
-    .ev-badge { font-size: 9px; font-weight: 700; letter-spacing: 0.32em; text-transform: uppercase; color: var(--gold); }
-    .ev-series-pill { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(248,243,231,0.35); background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); padding: 3px 10px; }
-    .ev-main-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(3rem, 5.5vw, 5.2rem);
-      font-weight: 600; line-height: 1.05; color: var(--cream);
-      margin-bottom: 20px; letter-spacing: -0.01em;
-    }
-    .ev-main-title em { font-style: italic; color: var(--gold2); }
-    .ev-main-desc { font-size: 13px; line-height: 1.9; color: rgba(248,243,231,0.42); max-width: 440px; margin-bottom: 36px; }
-    .ev-main-meta { display: flex; align-items: center; gap: 28px; flex-wrap: wrap; }
-    .ev-meta-item { display: flex; align-items: center; gap: 8px; font-size: 11px; letter-spacing: 0.12em; color: rgba(248,243,231,0.55); }
-    .ev-meta-item svg { color: var(--gold); opacity: 0.8; }
-
-    /* Right — countdown */
-    .ev-countdown { text-align: center; flex-shrink: 0; }
-    .ev-countdown-label { font-size: 8px; letter-spacing: 0.36em; text-transform: uppercase; color: rgba(248,243,231,0.3); margin-bottom: 16px; }
-    .ev-digits { display: flex; align-items: flex-start; gap: 4px; }
-    .ev-digit-block { display: flex; flex-direction: column; align-items: center; }
-    .ev-digit-num {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(3.8rem, 6vw, 6rem);
-      font-weight: 600; line-height: 1; color: var(--cream);
-      background: rgba(255,255,255,0.03); border: 1px solid rgba(177,147,74,0.12);
-      padding: 12px 18px; min-width: 90px; text-align: center;
-      transition: color 0.3s;
-    }
-    .ev-digit-sep {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(3rem, 5vw, 4.8rem); font-weight: 300;
-      color: rgba(177,147,74,0.4); line-height: 1.15;
-      padding: 12px 2px;
-    }
-    .ev-digit-unit { font-size: 8px; letter-spacing: 0.24em; text-transform: uppercase; color: rgba(248,243,231,0.28); margin-top: 8px; }
-    .ev-countdown-passed { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-style: italic; color: var(--gold2); text-align: center; }
-
-    /* EN VIVO state */
-    .events-sec.ev-live::before {
-      background: radial-gradient(ellipse 90% 70% at 55% 40%, rgba(177,147,74,0.13) 0%, transparent 65%),
-                  radial-gradient(ellipse 40% 50% at 10% 80%, rgba(20,43,70,0.6) 0%, transparent 60%);
-      animation: evGlowPulse 3s ease-in-out infinite;
-    }
-    @keyframes evGlowPulse {
-      0%,100% { opacity: 1; } 50% { opacity: 0.55; }
-    }
-    .ev-live-badge {
-      display: inline-flex; align-items: center; gap: 10px;
-      background: rgba(177,147,74,0.12); border: 1px solid rgba(177,147,74,0.4);
-      padding: 8px 18px; margin-bottom: 24px;
-    }
-    .ev-live-dot-big {
-      width: 10px; height: 10px; border-radius: 50%; background: #e74c3c; flex-shrink: 0;
-      box-shadow: 0 0 0 0 rgba(231,76,60,0.6);
-      animation: liveRing 1.4s ease-out infinite;
-    }
-    @keyframes liveRing {
-      0% { box-shadow: 0 0 0 0 rgba(231,76,60,0.7); }
-      70% { box-shadow: 0 0 0 12px rgba(231,76,60,0); }
-      100% { box-shadow: 0 0 0 0 rgba(231,76,60,0); }
-    }
-    .ev-live-text { font-size: 10px; font-weight: 700; letter-spacing: 0.32em; text-transform: uppercase; color: var(--gold2); }
-    .ev-live-block { text-align: center; padding: 16px 0; }
-    .ev-live-now { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.4rem, 4vw, 3.8rem); font-style: italic; color: var(--cream); line-height: 1.1; }
-    .ev-live-sub { font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase; color: rgba(248,243,231,0.35); margin-top: 10px; }
-
-    /* Week strip */
-    .ev-week-strip {
-      display: flex; border-top: 1px solid rgba(177,147,74,0.1);
-      position: relative; z-index: 1;
-    }
-    .ev-week-day {
-      flex: 1; padding: 20px 16px 22px; text-align: center;
-      border-right: 1px solid rgba(177,147,74,0.08);
-      cursor: default; transition: background 0.2s;
-      position: relative; overflow: hidden;
-    }
-    .ev-week-day:last-child { border-right: none; }
-    .ev-week-day.ev-day-active { background: rgba(177,147,74,0.09); }
-    .ev-week-day.ev-day-active::before {
-      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
-      background: linear-gradient(90deg, var(--gold), var(--gold2));
-    }
-    .ev-week-day.ev-day-past { opacity: 0.35; }
-    .ev-week-day-name { font-size: 8px; letter-spacing: 0.26em; text-transform: uppercase; color: rgba(248,243,231,0.35); margin-bottom: 6px; }
-    .ev-week-day.ev-day-active .ev-week-day-name { color: var(--gold); }
-    .ev-week-day-num { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 600; color: rgba(248,243,231,0.5); line-height: 1; margin-bottom: 8px; }
-    .ev-week-day.ev-day-active .ev-week-day-num { color: var(--cream); }
-    .ev-week-day-title { font-size: 9px; line-height: 1.4; color: rgba(248,243,231,0.3); }
-    .ev-week-day.ev-day-active .ev-week-day-title { color: rgba(248,243,231,0.65); }
-
-    /* Fallback no-event */
-    .ev-empty { flex: 1; display: flex; align-items: center; justify-content: center; padding: 80px 64px; font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-style: italic; color: rgba(248,243,231,0.2); }
-
-    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(0.85)} }
-
-    /* FOOTER */
-    footer { background: var(--navy2); color: rgba(248,243,231,0.55); padding: 80px 56px 36px; text-align: center; border-top: 1px solid rgba(177,147,74,0.1); }
-    .footer-logo { width: 64px; height: 64px; border-radius: 50%; background: var(--white); margin: 0 auto 24px; display: flex; align-items: center; justify-content: center; padding: 5px; }
-    .footer-logo img { width: 100%; height: 100%; object-fit: contain; }
-    footer .fname { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 22px; color: var(--cream); letter-spacing: 0.06em; margin-bottom: 8px; }
-    footer .ftag { font-size: 10px; letter-spacing: 0.32em; text-transform: uppercase; color: var(--gold); margin-bottom: 36px; }
-    .footer-nav { display: flex; gap: 32px; justify-content: center; flex-wrap: wrap; margin-bottom: 44px; }
-    .footer-nav a { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(248,243,231,0.55); transition: color 0.2s; }
-    .footer-nav a:hover { color: var(--gold2); }
-    footer .copy { font-size: 10px; letter-spacing: 0.04em; color: rgba(248,243,231,0.28); padding-top: 28px; border-top: 1px solid rgba(248,243,231,0.07); }
-
-    @media (max-width: 860px) {
-      header { padding: 20px 24px; } header.solid { padding: 14px 24px; }
-      .teasers { padding: 80px 24px; }
-      .teasers-grid { grid-template-columns: 1fr; gap: 16px; }
-      .teaser-card { min-height: auto; }
-      .events-sec { min-height: auto; }
-      .ev-topbar { padding: 24px 24px 0; }
-      .ev-main { grid-template-columns: 1fr; gap: 40px; padding: 36px 24px 28px; }
-      .ev-countdown { display: flex; flex-direction: column; align-items: flex-start; }
-      .ev-digit-num { font-size: 3rem; padding: 8px 14px; min-width: 70px; }
-      .ev-digit-sep { font-size: 2.6rem; }
-      .ev-deco-num { display: none; }
-      .ev-week-strip { flex-wrap: wrap; }
-      .ev-week-day { flex: 0 0 calc(100% / 5); padding: 14px 8px 16px; }
-      .ev-week-day-title { display: none; }
-      .ev-main-title { font-size: clamp(2.4rem, 9vw, 4rem); }
-      .nav-overlay { grid-template-columns: 1fr; } .nav-panel-right { display: none; }
-      .nav-panel-left { padding: 100px 36px 56px; overflow-y: auto; justify-content: flex-start; }
-      footer { padding: 60px 24px 28px; }
-    }
-    @media (max-width: 580px) { .hero h1 { font-size: clamp(3.6rem, 12vw, 5.5rem); } }
-    .nav-mobile-event {
-      display: none;
-    }
-    @media (max-width: 860px) {
-      .nav-mobile-event {
-        display: block;
-        margin-top: 32px;
-        padding: 20px 24px;
-        background: linear-gradient(135deg, #0d1e36, #1a3875);
-        border: 1px solid rgba(177,147,74,0.3);
-        border-radius: 4px;
-        text-decoration: none;
-        opacity: 0;
-        transition: opacity 0.5s ease 0.78s;
-      }
-      .nav-overlay.open .nav-mobile-event { opacity: 1; }
-      .nav-mobile-event-badge {
-        display: inline-block;
-        background: #b1934a;
-        color: #fff;
-        font-size: 9px;
-        font-weight: 600;
-        letter-spacing: 0.22em;
-        text-transform: uppercase;
-        padding: 4px 10px;
-        margin-bottom: 10px;
-      }
-      .nav-mobile-event-title {
-        display: block;
-        font-family: 'Cormorant Garamond', serif;
-        font-size: 1.8rem;
-        font-weight: 600;
-        color: #f8f3e7;
-        line-height: 1.2;
-        margin-bottom: 8px;
-      }
-      .nav-mobile-event-sub {
-        display: block;
-        font-size: 11px;
-        letter-spacing: 0.14em;
-        text-transform: uppercase;
-        color: rgba(248,243,231,0.55);
-      }
-    }
-
-    /* WHATSAPP FLOAT */
-    .wa-float {
-      position: fixed;
-      bottom: 28px;
-      right: 28px;
-      z-index: 999;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      background: linear-gradient(110deg, #6b21d4, #a855f7, #7c3aed, #6b21d4);
-      background-size: 300% 100%;
-      color: #fff;
-      border-radius: 50px;
-      padding: 14px 22px 14px 16px;
-      box-shadow: 0 8px 32px rgba(168,85,247,0.45), 0 0 0 0 rgba(168,85,247,0.3);
-      text-decoration: none;
-      font-family: 'Inter', sans-serif;
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      transition: transform 0.25s, box-shadow 0.25s;
-      animation: waIn 0.6s ease 1.5s both, chipFlow 3s linear 2s infinite, floatPulse 2.4s ease-in-out 2.5s infinite;
-    }
-    .wa-float:hover { transform: translateY(-4px); box-shadow: 0 18px 48px rgba(168,85,247,0.6), 0 0 60px rgba(168,85,247,0.25); }
-    @keyframes waIn { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
-    @keyframes floatPulse { 0%,100%{box-shadow:0 8px 32px rgba(168,85,247,0.45),0 0 0 0 rgba(168,85,247,0.3)} 50%{box-shadow:0 8px 32px rgba(168,85,247,0.45),0 0 0 10px rgba(168,85,247,0)} }
-    .wa-float-dot { width: 8px; height: 8px; border-radius: 50%; background: #fff; flex-shrink: 0; box-shadow: 0 0 6px rgba(255,255,255,0.8); animation: pulse 1.5s ease-in-out infinite; }
-    .wa-float-label { white-space: nowrap; }
-    @media (max-width: 600px) {
-      .wa-float { padding: 11px 16px 11px 12px; bottom: 18px; right: 14px; font-size: 10px; gap: 8px; }
-    }
-  </style>
-  <noscript><style>
-    .reveal, .reveal-scale, .reveal-left, .reveal-right, .stagger > * ,
-    .nav-links li, .nav-bottom, .nav-event-badge, .nav-event-title,
-    .nav-event-meta, .nav-event-cta {
-      opacity: 1 !important; transform: none !important; transition: none !important;
-    }
-  </style></noscript>
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important}
+  #balloons,#fw,#fw2{display:none}
+}
+</style>
 </head>
 <body>
 
-<div id="scrollBar"></div>
+<div id="balloons" aria-hidden="true"></div>
+<button class="snd" id="snd" type="button" aria-pressed="false">
+  <svg viewBox="0 0 24 24"><path d="M11 5 6 9H2v6h4l5 4z"/><path id="sndw" d="M23 9l-6 6M17 9l6 6"/></svg>
+  <span id="sndt">Activar efectos</span>
+</button>
 
-<!-- HEADER -->
-<header id="header">
-  <a class="brand" href="index.html">
-    <span class="brand-logo"><img src="assets/logo.png" alt="Parroquia Cristo Rey"/></span>
-    <span class="brand-text">
-      <span class="name">Cristo Rey</span>
-      <span class="sub">Iglesia Católica</span>
-    </span>
-  </a>
-  <button class="menu-btn" id="menuBtn" aria-label="Abrir menú" aria-expanded="false">
-    <span></span><span></span><span></span>
-  </button>
+<header class="hero">
+  <canvas id="fw"></canvas>
+  <div class="hero-inner">
+    <span class="hero-tag">Novenario · Noviembre</span>
+    <div class="hero-pre">Fiesta Patronal</div>
+    <h1 class="hero-title">Cristo Rey</h1>
+    <div class="hero-year" aria-label="2026"><span>2</span><span>0</span><span>2</span><span>6</span></div>
+    <div class="hero-dates">14 al 22 de noviembre · Culiacán, Sinaloa</div>
+    <div class="chip"><i></i><span id="ctext">Calculando…</span></div>
+  </div>
 </header>
 
-<!-- NAV OVERLAY -->
-<div class="nav-overlay" id="navOverlay" role="dialog" aria-label="Navegación principal" aria-hidden="true">
-  <div class="nav-panel-left">
-    <ul class="nav-links">
-      <li><a href="nosotros/"><span>Vida Parroquial</span></a></li>
-      <li><a href="horarios/"><span>Horarios</span></a></li>
-      <li><a href="ministerios/"><span>Ministerios</span></a></li>
-      <li><a href="eventos/"><span>Eventos</span></a></li>
-      <li><a href="blog/"><span>Revista</span></a></li>
-      <li><a href="contacto/"><span>Contacto</span></a></li>
-    </ul>
-    <div class="nav-bottom">
-      <div class="nav-bottom-item"><strong>Dirección</strong>Parroquia Cristo Rey<br>Culiacán, Sinaloa</div>
-      <div class="nav-bottom-item"><strong>Horario de oficina</strong>Mar – Sáb · 9:00 – 13:00</div>
-    </div>
-  </div>
-</div>
+<div class="picado" aria-hidden="true" id="picado"></div>
 
-<!-- HERO -->
-<section class="hero" id="inicio">
-  <div class="hero-bg"></div>
-  <div class="hero-content">
-    <h1>Cristo Rey<em>Comunidad de fe</em></h1>
-    <p>Un lugar de encuentro, oración y servicio. Te invitamos a vivir tu fe junto a nosotros.</p>
-    <div class="hero-cta">
-      <a class="btn btn-gold" href="horarios/">Horarios de Misa</a>
-      <a class="btn btn-outline" href="contacto/">Cómo llegar</a>
-    </div>
+<main class="wrap">
+  <div class="sec-title">
+    <small>Calendario de actividades</small>
+    <h2>¡Celebremos a nuestro Rey!</h2>
   </div>
-</section>
 
-<!-- STATEMENT -->
-<section class="statement" id="statement">
-  <div class="statement-inner reveal-scale">
-    <span class="st-tag">Parroquia Cristo Rey · Culiacán</span>
-    <h2 class="st-text">
-      Una comunidad <em>viva</em><br/>
-      llamada a glorificar<br/>
-      a <em>Cristo Rey</em>
-    </h2>
-    <div class="st-line"></div>
-    <p class="st-sub">Cada misa, cada sacramento, cada ministerio — todo apunta hacia un mismo horizonte: la gloria de Cristo Rey y el servicio a nuestra comunidad.</p>
-  </div>
-</section>
+  <div class="grid" id="grid">
 
-<!-- TEASER CARDS -->
-<section class="teasers">
-  <div class="teasers-head reveal">
-    <span class="label">Explora la parroquia</span>
-    <h2>Todo lo que<br/><em>necesitas saber</em></h2>
-  </div>
-  <div class="teasers-grid">
-    <div class="teaser-card reveal">
-      <div class="teaser-img">
-        <span class="teaser-num">01</span>
-        <span class="teaser-tag">Nuestra historia</span>
-      </div>
-      <div class="teaser-body">
-        <h3>Somos <em>Cristo Rey</em></h3>
-        <p>Más de cuatro décadas de fe, sacramentos y comunidad. Conoce quiénes somos y de dónde venimos.</p>
-        <a class="teaser-link" href="nosotros/">Conocer más <svg width="14" height="10" viewBox="0 0 14 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 5h12M8 1l5 4-5 4"/></svg></a>
+    <div class="day" data-d="14" style="--c:var(--red)">
+      <div class="date"><b>14</b><span>Sábado</span></div>
+      <div class="info">
+        <div class="ev"><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 3v18M7 8h10"/></svg></span>Inicio de Novena</div>
+        <div class="ev"><span class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>Misa <em>6:00 PM</em></div>
       </div>
     </div>
-    <div class="teaser-card reveal">
-      <div class="teaser-img teaser-img-dark">
-        <span class="teaser-num">02</span>
-        <span class="teaser-tag">Próximamente</span>
-      </div>
-      <div class="teaser-body">
-        <h3>Eventos y <em>anuncios</em></h3>
-        <p>Misas especiales, kermés y más. Mantente al día con nuestra agenda parroquial.</p>
-        <a class="teaser-link" href="eventos/">Ver eventos <svg width="14" height="10" viewBox="0 0 14 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 5h12M8 1l5 4-5 4"/></svg></a>
-      </div>
-    </div>
-    <div class="teaser-card reveal">
-      <div class="teaser-img teaser-img-mid">
-        <span class="teaser-num">03</span>
-        <span class="teaser-tag">Reflexión &amp; fe</span>
-      </div>
-      <div class="teaser-body">
-        <h3>La <em>Revista</em> parroquial</h3>
-        <p>Artículos, reflexiones y vida de la comunidad. Una ventana a la espiritualidad de Cristo Rey.</p>
-        <a class="teaser-link" href="blog/">Leer la revista <svg width="14" height="10" viewBox="0 0 14 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 5h12M8 1l5 4-5 4"/></svg></a>
-      </div>
-    </div>
-  </div>
-</section>
 
-<!-- CINEMATIC EVENTS SECTION -->
-<section class="events-sec" id="eventsSec">
-  <div class="ev-topbar">
-    <span class="ev-topbar-label">Agenda parroquial</span>
-    <a class="ev-topbar-link" href="eventos/">Ver todos los eventos <svg width="12" height="9" viewBox="0 0 14 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 5h12M8 1l5 4-5 4"/></svg></a>
-  </div>
-  <div id="evMain" class="ev-main" style="display:none;">
-    <div class="ev-left">
-      <div class="ev-badge-row">
-        <span class="ev-live-dot" id="evLiveDot"></span>
-        <span class="ev-badge" id="evBadge">Esta noche</span>
-        <span class="ev-series-pill" id="evSeriesPill"></span>
-      </div>
-      <h2 class="ev-main-title" id="evTitle"></h2>
-      <p class="ev-main-desc" id="evDesc"></p>
-      <div class="ev-main-meta">
-        <span class="ev-meta-item">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-          <span id="evTime">7:00 P.M.</span>
-        </span>
-        <span class="ev-meta-item">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          Parroquia Cristo Rey
-        </span>
+    <div class="day" data-d="15" style="--c:var(--orange)">
+      <div class="date"><b>15</b><span>Domingo</span></div>
+      <div class="info">
+        <div class="ev"><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 3v18M7 8h10"/></svg></span>Santa Misa <em>6:00 PM</em></div>
+        <div class="who">Preside <b>Sr. Obispo Mons. Jesús José Herrera Quiñónez</b></div>
+        <span class="badge">Obispo</span>
       </div>
     </div>
-    <div class="ev-countdown" id="evCountdown">
-      <div class="ev-countdown-label" id="evCountLabel">Comienza en</div>
-      <div class="ev-digits">
-        <div class="ev-digit-block"><div class="ev-digit-num" id="cdH">00</div><div class="ev-digit-unit">horas</div></div>
-        <div class="ev-digit-sep">:</div>
-        <div class="ev-digit-block"><div class="ev-digit-num" id="cdM">00</div><div class="ev-digit-unit">min</div></div>
-        <div class="ev-digit-sep">:</div>
-        <div class="ev-digit-block"><div class="ev-digit-num" id="cdS">00</div><div class="ev-digit-unit">seg</div></div>
-      </div>
-    </div>
-  </div>
-  <div class="ev-week-strip" id="evWeekStrip" style="display:none;"></div>
-  <div class="ev-empty" id="evEmpty" style="display:none;">No hay eventos próximos por el momento.</div>
-  <div class="ev-deco-num" id="evDecoNum"></div>
-</section>
 
-<!-- FOOTER -->
-<footer>
-  <div class="footer-logo"><img src="assets/logo.png" alt="Parroquia Cristo Rey"/></div>
-  <div class="fname">Parroquia Cristo Rey</div>
-  <div class="ftag">Iglesia Católica</div>
-  <div class="footer-nav">
-    <a href="nosotros/">Nosotros</a>
-    <a href="horarios/">Horarios</a>
-    <a href="ministerios/">Ministerios</a>
-    <a href="eventos/">Eventos</a>
-    <a href="blog/">Revista</a>
-    <a href="https://nichoscristorey.com/" target="_blank" rel="noopener">Nichos Cristo Rey</a>
-    <a href="contacto/">Contacto</a>
+    <div class="day" data-d="16" style="--c:#e0a800">
+      <div class="date"><b>16</b><span>Lunes</span></div>
+      <div class="info">
+        <div class="ev"><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 3v18M7 8h10"/></svg></span>Santa Misa <em>6:00 PM</em></div>
+        <div class="who">Preside <b>Sr. Obispo Mons. Jonás Guerrero Corona</b></div>
+        <span class="badge">Obispo</span>
+      </div>
+    </div>
+
+    <div class="day" data-d="17" style="--c:var(--green)">
+      <div class="date"><b>17</b><span>Martes</span></div>
+      <div class="info">
+        <div class="ev"><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 3v18M7 8h10"/></svg></span>Misa <em>6:00 PM</em></div>
+        <div class="ev"><span class="ic"><svg viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></span>Hora Santa Hakuna <em>7:00 PM</em></div>
+      </div>
+    </div>
+
+    <div class="day" data-d="18" style="--c:var(--turq)">
+      <div class="date"><b>18</b><span>Miércoles</span></div>
+      <div class="info">
+        <div class="ev"><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 3v18M7 8h10"/></svg></span>Misa <em>6:00 PM</em></div>
+        <div class="ev"><span class="ic"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>Charla universitarios y profesionistas <em>7:00 PM</em></div>
+      </div>
+    </div>
+
+    <div class="day" data-d="19" style="--c:var(--blue)">
+      <div class="date"><b>19</b><span>Jueves</span></div>
+      <div class="info">
+        <div class="ev"><span class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="9" r="5"/><path d="M12 2v2M12 14v8M8 22h8M5 9H3M21 9h-2"/></svg></span>Adoración Eucarística <em>5:00 PM</em></div>
+        <div class="ev"><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 3v18M7 8h10"/></svg></span>Misa <em>6:00 PM</em></div>
+      </div>
+    </div>
+
+    <div class="day" data-d="20" style="--c:var(--purple)">
+      <div class="date"><b>20</b><span>Viernes</span></div>
+      <div class="info">
+        <div class="ev"><span class="ic"><svg viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8z"/></svg></span>Misa por los enfermos <em>6:00 PM</em></div>
+        <div class="who">Preside <b>P. Manuel Silva</b></div>
+      </div>
+    </div>
+
+    <div class="day" data-d="21" style="--c:var(--pink)">
+      <div class="date"><b>21</b><span>Sábado</span></div>
+      <div class="info">
+        <div class="ev"><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 3v18M7 8h10"/></svg></span>Misa <em>6:00 PM</em></div>
+      </div>
+    </div>
+
+    <div class="finale day" data-d="22">
+      <canvas id="fw2"></canvas>
+      <div class="finale-in">
+        <div class="date"><b>22</b><span>Domingo</span></div>
+        <div class="fin-txt">
+          <small>Gran día de fiesta · Cristo Rey</small>
+          <h3>¡Kermés!</h3>
+          <p>Quema de Castillo <strong>9:00 PM</strong></p>
+          <div class="times">
+            <span>Misas:</span><span>8:00 AM</span><span>10:00 AM</span><span>12:00 PM</span><span>1:30 PM</span><span>6:00 PM</span><span>7:15 PM</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
-  <div class="copy">© 2026 Parroquia Cristo Rey. Todos los derechos reservados.</div>
-</footer>
+
+  <footer class="foot">
+    <div class="ad">Blvd. Pedro M. Anaya Nte. 2304, Col. Burócrata, 80030 Culiacán, Sin.</div>
+    <div class="nm">¡Te esperamos!</div>
+  </footer>
+</main>
 
 <script>
-  // Header scroll
-  const header = document.getElementById('header');
-  const onScroll = () => header.classList.toggle('solid', window.scrollY > 60);
-  window.addEventListener('scroll', onScroll); onScroll();
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // Progress bar
-  window.addEventListener('scroll', () => {
-    document.getElementById('scrollBar').style.width = (scrollY / (document.body.scrollHeight - innerHeight) * 100) + '%';
-  });
+/* papel picado */
+const pic=document.getElementById('picado');
+for(let i=0;i<24;i++){const d=document.createElement('div');d.className='pp';pic.appendChild(d)}
 
-  // Parallax hero
-  const heroBg = document.querySelector('.hero-bg');
-  window.addEventListener('scroll', () => { heroBg.style.transform = `translateY(${window.scrollY * 0.38}px)`; });
+/* balloons (DOM, clearly visible) */
+const COLS=['#ec4899','#fbbf24','#14b8a6','#f97316','#10b981','#4f46e5','#7c3aed','#ef4444'];
+const layer=document.getElementById('balloons');
+function balloon(initial){
+  const c=COLS[0|Math.random()*COLS.length];
+  const s=34+Math.random()*34;
+  const b=document.createElement('div');
+  b.className='balloon';
+  const dur=14+Math.random()*12;
+  b.style.left=(Math.random()*96)+'vw';
+  b.style.animationDuration=dur+'s';
+  if(initial)b.style.animationDelay=(-Math.random()*dur)+'s';
+  b.style.opacity=(.55+Math.random()*.35).toFixed(2);
+  b.innerHTML=`<svg width="${s}" height="${s*2.3}" viewBox="0 0 40 92" style="animation-duration:${2+Math.random()*2}s">
+    <path d="M20 47 C 18 58, 24 66, 19 76 S 22 88, 20 92" stroke="rgba(22,19,31,.25)" stroke-width="1" fill="none"/>
+    <ellipse cx="20" cy="22" rx="17" ry="21" fill="${c}"/>
+    <ellipse cx="13" cy="14" rx="4.5" ry="7" fill="#fff" opacity=".45" transform="rotate(-20 13 14)"/>
+    <path d="M16 43 L24 43 L20 48 Z" fill="${c}"/>
+  </svg>`;
+  b.addEventListener('animationend',e=>{if(e.target===b){b.remove();balloon(false)}});
+  layer.appendChild(b);
+}
+if(!reduce){for(let i=0;i<11;i++)balloon(true)}
 
-  // Nav overlay
-  (function() {
-    const btn = document.getElementById('menuBtn');
-    const overlay = document.getElementById('navOverlay');
-    function openNav() { overlay.classList.add('open'); overlay.setAttribute('aria-hidden','false'); btn.classList.add('open'); btn.setAttribute('aria-expanded','true'); document.body.style.overflow='hidden'; }
-    function closeNav() { overlay.classList.remove('open'); overlay.setAttribute('aria-hidden','true'); btn.classList.remove('open'); btn.setAttribute('aria-expanded','false'); document.body.style.overflow=''; }
-    btn.addEventListener('click', () => overlay.classList.contains('open') ? closeNav() : openNav());
-    overlay.querySelectorAll('a').forEach(a => a.addEventListener('click', closeNav));
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeNav(); });
-  })();
-
-  // Scroll reveal
-  const reveals = document.querySelectorAll('.reveal, .reveal-scale');
-  const io = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); }); }, { threshold: 0.12 });
-  reveals.forEach(el => io.observe(el));
-
-  // Header chip: show only while Semana Pastoral is active
-  (function() {
-    const pad = n => String(n).padStart(2,'0');
-    const n = new Date();
-    const today = `${n.getFullYear()}-${pad(n.getMonth()+1)}-${pad(n.getDate())}`;
-    fetch('assets/events.json')
-      .then(r => r.json())
-      .then(events => {
-        const seriesEnd = events
-          .filter(e => e.tag === 'Semana Pastoral')
-          .map(e => e.endDate || e.date)
-          .sort().pop();
-        const seriesStart = events
-          .filter(e => e.tag === 'Semana Pastoral')
-          .map(e => e.date)
-          .sort()[0];
-        if (seriesStart && seriesEnd && today >= seriesStart && today <= seriesEnd) {
-          document.getElementById('headerChip').style.display = 'inline-flex';
-        }
-      }).catch(() => {});
-  })();
-
-  // ── CINEMATIC EVENTS ──
-  (function() {
-    const MONTHS = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
-    const DAYS_SHORT = ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'];
-    const pad = n => String(n).padStart(2,'0');
-
-    function getToday() {
-      const n = new Date();
-      return `${n.getFullYear()}-${pad(n.getMonth()+1)}-${pad(n.getDate())}`;
+/* fireworks */
+function fireworks(cv,density){
+  const x=cv.getContext('2d');let W,H;const parts=[];
+  function rs(){const r=cv.getBoundingClientRect();W=cv.width=r.width*devicePixelRatio;H=cv.height=r.height*devicePixelRatio}
+  rs();addEventListener('resize',rs);
+  function burst(){
+    const r=cv.getBoundingClientRect();
+    if(r.bottom>0&&r.top<innerHeight&&window.boom)window.boom();
+    const cx=W*(.1+Math.random()*.8),cy=H*(.12+Math.random()*.45);
+    const col=COLS[0|Math.random()*COLS.length],col2='#fff6c0';
+    const n=36+(0|Math.random()*24);
+    for(let i=0;i<n;i++){
+      const a=i/n*Math.PI*2,sp=(1.5+Math.random()*2.6)*devicePixelRatio;
+      parts.push({x:cx,y:cy,vx:Math.cos(a)*sp,vy:Math.sin(a)*sp,l:1,c:Math.random()<.2?col2:col});
     }
-
-    function renderCountdown(ev, sec) {
-      const cdEl = document.getElementById('evCountdown');
-      const sec$ = document.getElementById('eventsSec');
-
-      // "En vivo": event has started (after its time, up to 3h later)
-      const [evH, evM] = (ev.time || '19:00').split(':').map(Number);
-      const now = new Date();
-      const startToday = new Date(); startToday.setHours(evH, evM, 0, 0);
-      const endToday = new Date(startToday.getTime() + 3 * 3600000); // assume ~3h event
-
-      if (now >= startToday && now < endToday) {
-        // LIVE state
-        sec$.classList.add('ev-live');
-        document.getElementById('evBadge').textContent = 'Sucediendo ahora';
-        cdEl.innerHTML = `
-          <div class="ev-live-block">
-            <div class="ev-live-badge">
-              <div class="ev-live-dot-big"></div>
-              <span class="ev-live-text">En vivo esta noche</span>
-            </div>
-            <div class="ev-live-now">Está pasando<br/><em>en este momento</em></div>
-            <div class="ev-live-sub">7:00 P.M. · Parroquia Cristo Rey</div>
-          </div>`;
-        return; // no interval needed
-      }
-
-      if (now < startToday) {
-        // Countdown to 7 PM
-        document.getElementById('evBadge').textContent = 'Hoy';
-        function tick() {
-          const diff = startToday - new Date();
-          if (diff <= 0) { renderCountdown(ev); return; }
-          const th = Math.floor(diff / 3600000);
-          const tm = Math.floor((diff % 3600000) / 60000);
-          const ts = Math.floor((diff % 60000) / 1000);
-          document.getElementById('cdH').textContent = pad(th);
-          document.getElementById('cdM').textContent = pad(tm);
-          document.getElementById('cdS').textContent = pad(ts);
-        }
-        document.getElementById('evCountLabel').textContent = 'Comienza en';
-        cdEl.querySelector('.ev-digits').style.display = 'flex';
-        tick();
-        const iv = setInterval(() => {
-          const d2 = startToday - new Date();
-          if (d2 <= 0) { clearInterval(iv); renderCountdown(ev); return; }
-          const th = Math.floor(d2/3600000), tm = Math.floor((d2%3600000)/60000), ts = Math.floor((d2%60000)/1000);
-          document.getElementById('cdH').textContent = pad(th);
-          document.getElementById('cdM').textContent = pad(tm);
-          document.getElementById('cdS').textContent = pad(ts);
-        }, 1000);
-      }
+  }
+  function loop(){
+    requestAnimationFrame(loop);
+    x.globalCompositeOperation='destination-out';
+    x.fillStyle='rgba(0,0,0,.18)';x.fillRect(0,0,W,H);
+    x.globalCompositeOperation='lighter';
+    if(Math.random()<density)burst();
+    for(let i=parts.length-1;i>=0;i--){
+      const p=parts[i];p.x+=p.vx;p.y+=p.vy;p.vy+=.035*devicePixelRatio;p.vx*=.985;p.vy*=.985;p.l-=.012;
+      if(p.l<=0){parts.splice(i,1);continue}
+      x.globalAlpha=p.l;x.fillStyle=p.c;x.beginPath();x.arc(p.x,p.y,2*devicePixelRatio,0,7);x.fill();
     }
+    x.globalAlpha=1;
+  }
+  loop();
+}
+if(!reduce){fireworks(document.getElementById('fw'),.035);fireworks(document.getElementById('fw2'),.05)}
 
-    fetch('assets/events.json')
-      .then(r => r.json())
-      .then(events => {
-        const TODAY = getToday();
-        const nowTs = new Date();
+/* firework sound (Web Audio, synthesized) */
+let AC=null,soundOn=false,master=null;
+function noiseBuf(sec){
+  const b=AC.createBuffer(1,AC.sampleRate*sec,AC.sampleRate),d=b.getChannelData(0);
+  for(let i=0;i<d.length;i++)d[i]=Math.random()*2-1;
+  return b;
+}
+window.boom=function(){
+  if(!soundOn||!AC)return;
+  const t=AC.currentTime+Math.random()*.15;
+  const vol=.35+Math.random()*.4;
+  // whistle up
+  if(Math.random()<.5){
+    const o=AC.createOscillator(),g=AC.createGain();
+    o.type='sine';o.frequency.setValueAtTime(900,t-.5);o.frequency.exponentialRampToValueAtTime(2200,t);
+    g.gain.setValueAtTime(0,t-.5);g.gain.linearRampToValueAtTime(.04,t-.3);g.gain.linearRampToValueAtTime(0,t);
+    o.connect(g).connect(master);o.start(t-.5);o.stop(t);
+  }
+  // boom
+  const n=AC.createBufferSource();n.buffer=noiseBuf(1.2);
+  const lp=AC.createBiquadFilter();lp.type='lowpass';lp.frequency.setValueAtTime(1800,t);lp.frequency.exponentialRampToValueAtTime(120,t+.8);
+  const g=AC.createGain();g.gain.setValueAtTime(vol,t);g.gain.exponentialRampToValueAtTime(.001,t+1.1);
+  n.connect(lp).connect(g).connect(master);n.start(t);n.stop(t+1.2);
+  // thump
+  const o=AC.createOscillator(),og=AC.createGain();
+  o.frequency.setValueAtTime(110,t);o.frequency.exponentialRampToValueAtTime(40,t+.35);
+  og.gain.setValueAtTime(vol*.9,t);og.gain.exponentialRampToValueAtTime(.001,t+.4);
+  o.connect(og).connect(master);o.start(t);o.stop(t+.45);
+  // crackle
+  const cr=12+(0|Math.random()*14);
+  for(let i=0;i<cr;i++){
+    const ct=t+.35+Math.random()*1.1;
+    const s=AC.createBufferSource();s.buffer=noiseBuf(.04);
+    const hp=AC.createBiquadFilter();hp.type='highpass';hp.frequency.value=2500+Math.random()*3000;
+    const sg=AC.createGain();sg.gain.setValueAtTime(.08+Math.random()*.1,ct);sg.gain.exponentialRampToValueAtTime(.001,ct+.04);
+    s.connect(hp).connect(sg).connect(master);s.start(ct);s.stop(ct+.05);
+  }
+};
+/* crowd ambience */
+let crowd=null,whTimer=null,shTimer=null;
+function startCrowd(){
+  if(crowd)return;
+  crowd=true;
+}
+function stopCrowd(){
+  if(!crowd)return;
+  clearTimeout(whTimer);
+  crowd=null;
+}
+function cheer(t){
+  if(!crowd)return;
+  const g=crowd.out.gain;
+  g.cancelScheduledValues(t);
+  g.setValueAtTime(.16,t);g.linearRampToValueAtTime(.42,t+.35);g.linearRampToValueAtTime(.16,t+2.6);
+  for(let i=0;i<3+(0|Math.random()*3);i++)shout(t+Math.random()*.9);
+  if(Math.random()<.6)setTimeout(whistle,300+Math.random()*700);
+}
+/* single voice "¡eeeh!/¡uuuh!" — sawtooth through vowel formants */
+function shout(t){
+  if(!soundOn)return;
+  const o=AC.createOscillator();o.type='sawtooth';
+  const f0=220+Math.random()*260;
+  o.frequency.setValueAtTime(f0,t);
+  o.frequency.linearRampToValueAtTime(f0*(1.15+Math.random()*.3),t+.25);
+  o.frequency.linearRampToValueAtTime(f0*.85,t+.7);
+  const vib=AC.createOscillator(),vg=AC.createGain();vib.frequency.value=6;vg.gain.value=f0*.03;vib.connect(vg).connect(o.frequency);
+  const vowels=[[700,1220],[400,2000],[300,870],[500,1700]];
+  const [f1,f2]=vowels[0|Math.random()*vowels.length];
+  const mix=AC.createGain();mix.gain.value=0;
+  [f1,f2].forEach((f,i)=>{const b=AC.createBiquadFilter();b.type='bandpass';b.frequency.value=f;b.Q.value=8;const bg=AC.createGain();bg.gain.value=i?.5:1;o.connect(b).connect(bg).connect(mix)});
+  const pan=AC.createStereoPanner?AC.createStereoPanner():null;
+  const v=.05+Math.random()*.06,d=.5+Math.random()*.5;
+  mix.gain.setValueAtTime(0,t);mix.gain.linearRampToValueAtTime(v,t+.06);mix.gain.setValueAtTime(v,t+d*.6);mix.gain.linearRampToValueAtTime(0,t+d);
+  if(pan){pan.pan.value=Math.random()*1.6-.8;mix.connect(pan).connect(master)}else mix.connect(master);
+  o.start(t);vib.start(t);o.stop(t+d+.05);vib.stop(t+d+.05);
+}
+/* Mexican whistles: wolf whistle (fiu-fiuuu) or long two-finger whistle */
+function whistle(){
+  if(!soundOn||!AC)return;
+  const t=AC.currentTime+.02;
+  const o=AC.createOscillator(),g=AC.createGain();o.type='sine';
+  const base=1700+Math.random()*700;
+  g.gain.value=0;
+  const kind=Math.random();
+  if(kind<.5){
+    // fiu ... fiuuu
+    o.frequency.setValueAtTime(base*.75,t);o.frequency.exponentialRampToValueAtTime(base*1.35,t+.16);
+    g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.09,t+.03);g.gain.linearRampToValueAtTime(0,t+.18);
+    const t2=t+.28;
+    o.frequency.setValueAtTime(base*1.3,t2);o.frequency.exponentialRampToValueAtTime(base*1.5,t2+.12);o.frequency.exponentialRampToValueAtTime(base*.7,t2+.6);
+    g.gain.setValueAtTime(0,t2);g.gain.linearRampToValueAtTime(.09,t2+.04);g.gain.setValueAtTime(.08,t2+.4);g.gain.linearRampToValueAtTime(0,t2+.62);
+    o.start(t);o.stop(t2+.7);
+  } else {
+    // long piercing chiflido with wobble
+    const d=.7+Math.random()*.6;
+    o.frequency.setValueAtTime(base*1.1,t);o.frequency.linearRampToValueAtTime(base*1.25,t+.1);o.frequency.linearRampToValueAtTime(base*1.15,t+d);
+    const w=AC.createOscillator(),wg=AC.createGain();w.frequency.value=5+Math.random()*3;wg.gain.value=35;w.connect(wg).connect(o.frequency);w.start(t);w.stop(t+d+.05);
+    g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.08,t+.05);g.gain.setValueAtTime(.08,t+d-.1);g.gain.linearRampToValueAtTime(0,t+d);
+    o.start(t);o.stop(t+d+.05);
+  }
+  const pan=AC.createStereoPanner?AC.createStereoPanner():null;
+  if(pan){pan.pan.value=Math.random()*1.6-.8;o.connect(g).connect(pan).connect(master)}else o.connect(g).connect(master);
+}
 
-        const allUpcoming = events
-          .filter(ev => (ev.endDate || ev.date) >= TODAY)
-          .sort((a, b) => a.date.localeCompare(b.date));
+const sb=document.getElementById('snd'),st=document.getElementById('sndt'),sw=document.getElementById('sndw');
+sb.addEventListener('click',()=>{
+  if(!AC){
+    AC=new (window.AudioContext||window.webkitAudioContext)();
+    master=AC.createGain();master.gain.value=.6;
+    const comp=AC.createDynamicsCompressor();
+    master.connect(comp).connect(AC.destination);
+  }
+  AC.resume();
+  soundOn=!soundOn;
+  sb.classList.toggle('on',soundOn);
+  sb.setAttribute('aria-pressed',soundOn);
+  st.textContent=soundOn?'Efectos activados':'Activar efectos';
+  soundOn?startCrowd():stopCrowd();
+  sw.setAttribute('d',soundOn?'M15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14':'M23 9l-6 6M17 9l6 6');
+  if(soundOn)window.boom();
+});
 
-        if (!allUpcoming.length) { document.getElementById('evEmpty').style.display = 'flex'; return; }
+/* countdown */
+const el=document.getElementById('ctext');
+const start=new Date('2026-11-14T18:00:00'),end=new Date('2026-11-23T00:00:00');
+function tick(){
+  const now=new Date();
+  if(now>=end){el.textContent='¡Gracias por celebrar con nosotros!';return}
+  if(now>=start){el.textContent=`¡Ya estamos de fiesta! Día ${Math.floor((now-start)/864e5)+1} del novenario`;return}
+  const t=start-now,d=0|t/864e5,h=0|t%864e5/36e5,m=0|t%36e5/6e4,s=0|t%6e4/1e3;
+  el.textContent=d>0?`Faltan ${d} día${d>1?'s':''} · ${h}h ${m}m ${s}s`:`Faltan ${h}h ${m}m ${s}s`;
+}
+tick();setInterval(tick,1000);
 
-        // Pick the featured event: prefer today's timed event; skip if already finished (>3h past start)
-        let featuredEv = null;
-        for (const ev of allUpcoming) {
-          if (ev.date === TODAY && ev.time) {
-            const [hh, mm] = ev.time.split(':').map(Number);
-            const evEnd = new Date(); evEnd.setHours(hh + 3, mm, 0, 0);
-            if (nowTs < evEnd) { featuredEv = ev; break; }
-          } else if (!featuredEv) {
-            featuredEv = ev;
-          }
-        }
-        if (!featuredEv) featuredEv = allUpcoming[0];
-
-        const isToday = featuredEv.date === TODAY;
-        const isTomorrow = (() => {
-          const t = new Date(); t.setDate(t.getDate() + 1);
-          return featuredEv.date === `${t.getFullYear()}-${pad(t.getMonth()+1)}-${pad(t.getDate())}`;
-        })();
-
-        // Populate content
-        const d = new Date(featuredEv.date + 'T00:00:00');
-        const colonIdx = featuredEv.title.indexOf(':');
-        const titleHtml = colonIdx > -1
-          ? `${featuredEv.title.slice(0, colonIdx + 1)} <em>${featuredEv.title.slice(colonIdx + 1).trim()}</em>`
-          : `<em>${featuredEv.title}</em>`;
-        document.getElementById('evTitle').innerHTML = titleHtml;
-        document.getElementById('evDesc').textContent = featuredEv.description;
-        document.getElementById('evSeriesPill').textContent = featuredEv.tag;
-        document.getElementById('evDecoNum').textContent = pad(d.getDate());
-        document.getElementById('evMain').style.display = 'grid';
-
-        // Badge label
-        const badgeEl = document.getElementById('evBadge');
-        const dotEl = document.getElementById('evLiveDot');
-        if (isToday) {
-          badgeEl.textContent = 'Esta noche'; dotEl.style.display = 'block';
-        } else if (isTomorrow) {
-          badgeEl.textContent = 'Mañana'; dotEl.style.display = 'none';
-        } else {
-          badgeEl.textContent = `${d.getDate()} de ${MONTHS[d.getMonth()]}`; dotEl.style.display = 'none';
-        }
-
-        // --- COUNTDOWN: always run toward the event start ---
-        const evTime = featuredEv.time || '19:00';
-        const [evH, evM] = evTime.split(':').map(Number);
-        const target = new Date(featuredEv.date + 'T00:00:00');
-        target.setHours(evH, evM, 0, 0);
-
-        // Check if currently LIVE (started, within 3h)
-        const evEnd = new Date(target.getTime() + 3 * 3600000);
-        if (isToday && nowTs >= target && nowTs < evEnd) {
-          renderCountdown(featuredEv);
-          return; // live state handled inside
-        }
-
-        // Otherwise: running countdown (even if days away)
-        document.getElementById('evCountLabel').textContent =
-          isToday ? 'Comienza en' : isTomorrow ? 'Mañana a las 7 PM' : 'Faltan';
-
-        function tick() {
-          const diff = target - new Date();
-          if (diff <= 0 && isToday) { renderCountdown(featuredEv); return; }
-          if (diff <= 0) return;
-          const totalH = Math.floor(diff / 3600000);
-          const days = Math.floor(totalH / 24);
-          const hrs  = totalH % 24;
-          const mins = Math.floor((diff % 3600000) / 60000);
-          const secs = Math.floor((diff % 60000) / 1000);
-          if (days > 0) {
-            document.getElementById('cdH').textContent = pad(days);
-            document.getElementById('cdM').textContent = pad(hrs);
-            document.getElementById('cdS').textContent = pad(mins);
-            document.getElementById('cdH').closest('.ev-digit-block').querySelector('.ev-digit-unit').textContent = days === 1 ? 'día' : 'días';
-            document.getElementById('cdM').closest('.ev-digit-block').querySelector('.ev-digit-unit').textContent = 'horas';
-            document.getElementById('cdS').closest('.ev-digit-block').querySelector('.ev-digit-unit').textContent = 'min';
-          } else {
-            document.getElementById('cdH').textContent = pad(hrs);
-            document.getElementById('cdM').textContent = pad(mins);
-            document.getElementById('cdS').textContent = pad(secs);
-            document.getElementById('cdH').closest('.ev-digit-block').querySelector('.ev-digit-unit').textContent = 'horas';
-            document.getElementById('cdM').closest('.ev-digit-block').querySelector('.ev-digit-unit').textContent = 'min';
-            document.getElementById('cdS').closest('.ev-digit-block').querySelector('.ev-digit-unit').textContent = 'seg';
-          }
-        }
-        tick();
-        setInterval(tick, 1000);
-
-        // Week strip — Semana Pastoral
-        const seriesEvents = allUpcoming.filter(e => e.tag === 'Semana Pastoral');
-        if (seriesEvents.length) {
-          const strip = document.getElementById('evWeekStrip');
-          strip.style.display = 'flex';
-          strip.innerHTML = seriesEvents.map(ev => {
-            const sd = new Date(ev.date + 'T00:00:00');
-            const isActive = ev.date === TODAY;
-            const isPast = ev.date < TODAY;
-            const cls = isActive ? 'ev-day-active' : isPast ? 'ev-day-past' : '';
-            const colonI = ev.title.indexOf(':');
-            const shortTitle = colonI > -1 ? ev.title.slice(0, colonI).trim() : ev.title;
-            return `<div class="ev-week-day ${cls}">
-              <div class="ev-week-day-name">${DAYS_SHORT[sd.getDay()]}</div>
-              <div class="ev-week-day-num">${sd.getDate()}</div>
-              <div class="ev-week-day-title">${shortTitle}</div>
-            </div>`;
-          }).join('');
-        }
-      })
-      .catch(() => { document.getElementById('evEmpty').style.display = 'flex'; });
-  })();
+/* highlight today */
+const n=new Date();
+if(n.getMonth()===10&&n.getFullYear()===2026){
+  const t=document.querySelector(`.day[data-d="${n.getDate()}"]`);if(t)t.classList.add('today');
+}
 </script>
-
-<!-- WHATSAPP FLOAT -->
-<a class="wa-float" href="#eventsSec" onclick="document.getElementById('eventsSec').scrollIntoView({behavior:'smooth'});return false;" aria-label="Ver eventos de esta semana">
-  <span class="wa-float-dot"></span>
-  <span class="wa-float-label">Esta semana →</span>
-</a>
 </body>
 </html>
