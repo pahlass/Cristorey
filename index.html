@@ -398,7 +398,7 @@ function balloon(initial){
 }
 /* ── balloon challenge ── */
 const GAME_SECS=30;
-const SEED={score:145,name:'Antonio'};
+const SEED={score:0,name:''};
 let game=null,modalOpen=false,record={...SEED};
 const hud=document.getElementById('hud');
 function speedMult(){return game?1+.35*(game.level-1):1}
