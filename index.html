@@ -398,7 +398,8 @@ function balloon(initial){
 }
 /* ── balloon challenge ── */
 const GAME_SECS=30;
-let game=null,modalOpen=false,record={score:0,name:''};
+const SEED={score:145,name:'Antonio'};
+let game=null,modalOpen=false,record={...SEED};
 const hud=document.getElementById('hud');
 function speedMult(){return game?1+.35*(game.level-1):1}
 function sizeMult(){return game?Math.max(.6,1-.07*(game.level-1)):1}
@@ -472,8 +473,8 @@ function showResult(score){
   document.body.appendChild(ov);
 }
 async function loadRecord(){
-  try{const r=await fetch('/api/record',{cache:'no-store'});if(r.ok){const j=await r.json();if(j&&typeof j.score==='number'){record=j;renderHud();return}}}catch(e){}
-  try{const j=JSON.parse(localStorage.getItem('cr-record')||'null');if(j&&typeof j.score==='number')record=j}catch(e){}
+  try{const r=await fetch('/api/record',{cache:'no-store'});if(r.ok){const j=await r.json();if(j&&typeof j.score==='number'){record=j.score>0?j:{...SEED};renderHud();return}}}catch(e){}
+  try{const j=JSON.parse(localStorage.getItem('cr-record')||'null');if(j&&typeof j.score==='number'&&j.score>SEED.score)record=j}catch(e){}
   renderHud();
 }
 async function saveRecord(score,name){

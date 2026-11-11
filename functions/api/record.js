@@ -9,7 +9,7 @@ function json(body, status = 200) {
 }
 
 async function current(env) {
-  return (await env.RECORD.get('record', { type: 'json' })) || { score: 0, name: '' };
+  return (await env.RECORD.get('record', { type: 'json' })) || { score: 145, name: 'Antonio' };
 }
 
 export async function onRequestGet({ env }) {
